@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="author" content="Dimitris Nats (dimnats@windowslive.com)" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title></title>
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/32.png" />
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/16.png" />
+	<link rel="stylesheet" href="scripts/css/style.css" />
+</head>
+
+<body>
+	<main>
+		<header>
+			<h1>My Gw2 Account Charts</h1>
+			<input type="text" id="token" placeholder="Api token" value="" />
+			<div id="log">waiting for token</div>
+		</header>
+		<article id="charts">
+			<section id="races">
+				<h2>Races</h2>
+				<ul class="pie"></ul>
+			</section>
+			<section id="professions">
+				<h2>Professions</h2>
+				<ul class="pie"></ul>
+			</section>
+			<section id="genders">
+				<h2>Genders</h2>
+				<ul class="pie"></ul>
+			</section>
+			<section id="levels">
+				<h2>Levels</h2>
+				<ul class="pie"></ul>
+			</section>
+			<section id="played">
+				<h2>Played</h2>
+				<ul class="bars"></ul>
+			</section>
+			<section id="deaths">
+				<h2>Deaths</h2>
+				<ul class="bars"></ul>
+			</section>
+		</article>
+	</main>
+	<script src="scripts/js/parser.js"></script>
+	<script src="scripts/js/charts.js"></script>
+	<script src="scripts/js/api.js"></script>
+	<script src="scripts/js/interface.js"></script>
+</body>
+
+</html>

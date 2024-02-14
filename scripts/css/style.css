@@ -1,0 +1,112 @@
+@font-face {
+	font-family: "Open Sans";
+	src: url("../ttf/OpenSans-Light.ttf");
+	font-weight: 300;
+}
+
+@font-face {
+	font-family: "Open Sans";
+	src: url("../ttf/OpenSans-Regular.ttf");
+	font-weight: 400;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "Open Sans", Helvetica, Arial, sans-serif;
+	font-size: 1.4rem;
+	font-weight: 400;
+	user-select: none;
+	color: #777;
+}
+
+main {
+	width: 800px;
+	margin: 0 auto;
+	box-sizing: border-box;;
+}
+
+input {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #ccc;
+	width: 100%;
+	padding: 6px 4px;
+	outline: none;
+	box-sizing: border-box;
+	border-radius: 2px;
+}
+
+input:focus {
+	border-color: #666;
+}
+
+#log {
+	padding: 6px 0;
+	font-size: 1.1rem;
+	text-align: right;
+	color: #aaa;
+}
+
+article {
+	display: none;
+}
+
+section {
+	min-height: 320px;
+	background-repeat: no-repeat;
+	background-position: top right;
+	background-size: 320px 320px;
+	margin: 64px 0;
+}
+
+section h2 {
+	font-size: 1.4em;
+	margin-top: 0;
+	margin-bottom: 1rem;
+}
+
+section ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+section ul.pie li {
+	padding: 4px 0;
+	color: #444;
+}
+
+section ul.pie li span:first-of-type {
+	padding-right: 6px;
+	text-shadow: 1px 1px #aaa;
+}
+
+section ul.bars li {
+	position: relative;
+	padding: 8px;
+	box-sizing: border-box;
+}
+
+section ul.bars li div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	z-index: 1;
+	box-sizing: border-box;
+}
+
+section ul.bars li span {
+	position: relative;
+	mix-blend-mode: difference;
+	z-index: 2;
+}
