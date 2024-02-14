@@ -23,10 +23,10 @@ function parseCharacterData(data) {
 				backgroundColor: '#6495ED'
 			}]
 		},
-		played: {
+		age: {
 			labels: [],
 			datasets: [{
-				label: 'played',
+				label: 'age (seconds)',
 				data: [],
 				backgroundColor: '#FFBF00'
 			}]
@@ -52,8 +52,8 @@ function parseCharacterData(data) {
 		values.levels.labels.push(character.name);
 		values.levels.datasets[0].data.push(character.level);
 
-		values.played.labels.push(character.name);
-		values.played.datasets[0].data.push(character.age);
+		values.age.labels.push(character.name);
+		values.age.datasets[0].data.push(character.age);
 
 		values.deaths.labels.push(character.name);
 		values.deaths.datasets[0].data.push(character.deaths);

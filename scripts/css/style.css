@@ -59,3 +59,17 @@ input:focus {
 section {
 	margin: 24px 0;
 }
+
+nav {
+	position: fixed;
+	top: 24px;
+	right: 24px;
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+}
+
+#graphs {
+	padding: 12px;
+	box-sizing: border-box;
+}

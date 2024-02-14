@@ -117,12 +117,12 @@ const chartsStructure = {
 			}
 		}
 	},
-	Played: {
+	Age: {
 		type: 'bar',
 		data: {
 			labels: [],
 			datasets: [{
-				label: 'played',
+				label: 'age (seconds)',
 				data: [],
 				backgroundColor: '#FFBF00'
 			}]
@@ -133,7 +133,7 @@ const chartsStructure = {
 			plugins: {
 				title: {
 					display: true,
-					text: 'Played',
+					text: 'Age',
 					align: 'start',
 					padding: {
 						top: 0,

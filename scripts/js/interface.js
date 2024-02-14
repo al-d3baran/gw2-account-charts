@@ -4,14 +4,16 @@ const uiRaces = document.getElementById('races');
 const uiProfessions = document.getElementById('professions');
 const uiGenders = document.getElementById('genders');
 const uiLevels = document.getElementById('levels');
-const uiPlayed = document.getElementById('played');
+const uiAge = document.getElementById('age');
 const uiDeaths = document.getElementById('deaths');
+const uiScreenshot = document.getElementById('screenshot');
+const uiGraphs = document.getElementById('graphs');
 
 const chartRaces = new Chart(uiRaces, chartsStructure.Races);
 const chartProfessions = new Chart(uiProfessions, chartsStructure.Professions);
 const chartGenders = new Chart(uiGenders, chartsStructure.Genders);
 const chartLevels = new Chart(uiLevels, chartsStructure.Levels);
-const chartPlayed = new Chart(uiPlayed, chartsStructure.Played);
+const chartAge = new Chart(uiAge, chartsStructure.Age);
 const chartDeaths = new Chart(uiDeaths, chartsStructure.Deaths);
 
 uiToken.addEventListener('keydown', async (e) => {
@@ -48,14 +50,14 @@ uiToken.addEventListener('keydown', async (e) => {
 			chartsStructure.Professions.data.datasets = parsed.professions;
 			chartsStructure.Genders.data.datasets = parsed.genders;
 			chartsStructure.Levels.data = parsed.levels;
-			chartsStructure.Played.data = parsed.played;
+			chartsStructure.Age.data = parsed.age;
 			chartsStructure.Deaths.data = parsed.deaths;
 
 			chartRaces.update();
 			chartProfessions.update();
 			chartGenders.update();
 			chartLevels.update();
-			chartPlayed.update();
+			chartAge.update();
 			chartDeaths.update();
 
 			uiLog.textContent = 'done';
@@ -65,3 +67,12 @@ uiToken.addEventListener('keydown', async (e) => {
 		}
 	}
 });
+
+uiScreenshot.addEventListener('click', () => {
+	html2canvas(uiGraphs).then(canvas => {
+		var link = document.createElement('a');
+		link.href = canvas.toDataURL('image/png');
+		link.download = 'gw2-account-charts.png';
+		link.click();
+	});
+})

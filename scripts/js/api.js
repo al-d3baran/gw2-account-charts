@@ -1,42 +1,38 @@
 const apiUrl = 'https://api.guildwars2.com/v2/';
 
 const requestApi = async (api, key = null) => {
-	return new Promise(async (resolve, reject) => {
-		const uri = key === null ? encodeURI(`${apiUrl}${api}`) : encodeURI(`${apiUrl}${api}?access_token=${key}`);
-		const xhr = new XMLHttpRequest();
+	const uri = key === null ? `${apiUrl}${api}` : `${apiUrl}${api}?access_token=${key}`;
 
-		xhr.addEventListener('load', () => {
-			if (xhr.readyState === 4 && xhr.status === 200)
-				resolve(JSON.parse(xhr.responseText));
-			else
-				reject({ status: xhr.status, statusText: xhr.statusText, error: 'Request failed' });
-		});
+	try {
+		const response = await fetch(uri);
 
-		xhr.addEventListener('error', () => {
-			reject({ status: xhr.status, statusText: xhr.statusText, error: 'Request failed' });
-		});
+		if (!response.ok) {
+			throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
+		}
 
-		xhr.open('GET', uri, true);
-		xhr.send();
-	});
+		return await response.json();
+	} catch (error) {
+		throw new Error(`Request failed: ${error.message}`);
+	}
 };
 
-const fetchCharacters = async token => {
+const fetchCharacters = async (token) => {
 	try {
 		const data = await requestApi('characters', token);
 		return data;
 	} catch (error) {
+		console.error(`Error fetching characters: ${error.message}`);
 		return null;
 	}
 };
 
 const fetchData = async (token, characters) => {
-	const tasks = characters.map(character => () => requestApi(`characters/${character}`, token));
-
 	try {
-		const data = await Promise.all(tasks.map(task => task()));
+		const tasks = characters.map((character) => requestApi(`characters/${character}`, token));
+		const data = await Promise.all(tasks);
 		return data;
 	} catch (error) {
+		console.error(`Error fetching data: ${error.message}`);
 		return null;
 	}
 };
@@ -44,13 +40,14 @@ const fetchData = async (token, characters) => {
 const verifyPermissions = async (token, permissions) => {
 	try {
 		const data = await requestApi('tokeninfo', token);
-		return permissions.every(permission => data.permissions.includes(permission));
+		return permissions.every((permission) => data.permissions.includes(permission));
 	} catch (error) {
+		console.error(`Error verifying permissions: ${error.message}`);
 		return false;
 	}
 };
 
-const verifyToken = token => {
+const verifyToken = (token) => {
 	const key = token.trim().replace(/-/g, '').toUpperCase();
 	return /^[0-9A-F]+$/.test(key) && key.length === 64;
 };

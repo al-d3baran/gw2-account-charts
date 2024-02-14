@@ -6,3 +6,4 @@ References:
 
 Libraries:
 * [charts.js](https://www.chartjs.org)
+* [html2canvas](https://html2canvas.hertzen.com)
