@@ -17,6 +17,15 @@ const chartsStructure = {
 			plugins: {
 				legend: {
 					position: 'left',
+				},
+				title: {
+					display: true,
+					text: 'Races',
+					align: 'start',
+					padding: {
+						top: 0,
+						bottom: 0
+					}
 				}
 			}
 		}
@@ -39,6 +48,15 @@ const chartsStructure = {
 			plugins: {
 				legend: {
 					position: 'left',
+				},
+				title: {
+					display: true,
+					text: 'Professions',
+					align: 'start',
+					padding: {
+						top: 0,
+						bottom: 0
+					}
 				}
 			}
 		}
@@ -60,6 +78,15 @@ const chartsStructure = {
 			plugins: {
 				legend: {
 					position: 'left',
+				},
+				title: {
+					display: true,
+					text: 'Genders',
+					align: 'start',
+					padding: {
+						top: 0,
+						bottom: 0
+					}
 				}
 			}
 		}
@@ -76,7 +103,18 @@ const chartsStructure = {
 		},
 		options: {
 			indexAxis: 'y',
-			responsive: true
+			responsive: true,
+			plugins: {
+				title: {
+					display: true,
+					text: 'Levels',
+					align: 'start',
+					padding: {
+						top: 0,
+						bottom: 0
+					}
+				}
+			}
 		}
 	},
 	Played: {
@@ -91,7 +129,18 @@ const chartsStructure = {
 		},
 		options: {
 			indexAxis: 'y',
-			responsive: true
+			responsive: true,
+			plugins: {
+				title: {
+					display: true,
+					text: 'Played',
+					align: 'start',
+					padding: {
+						top: 0,
+						bottom: 0
+					}
+				}
+			}
 		}
 	},
 	Deaths: {
@@ -106,7 +155,18 @@ const chartsStructure = {
 		},
 		options: {
 			indexAxis: 'y',
-			responsive: true
+			responsive: true,
+			plugins: {
+				title: {
+					display: true,
+					text: 'Deaths',
+					align: 'start',
+					padding: {
+						top: 0,
+						bottom: 0
+					}
+				}
+			}
 		}
 	}
 }
