@@ -1,45 +1,62 @@
 function parseCharacterData(data) {
 	const values = {
-		gender: [{ name: 'Male', value: 0 }, { name: 'Female', value: 0 }],
-		level: [{ name: 'Capped', value: 0 }, { name: 'Uncapped', value: 0 }],
-		profession: [
-			{ name: 'Elementalist', value: 0 },
-			{ name: 'Engineer', value: 0 },
-			{ name: 'Guardian', value: 0 },
-			{ name: 'Mesmer', value: 0 },
-			{ name: 'Necromancer', value: 0 },
-			{ name: 'Ranger', value: 0 },
-			{ name: 'Revenant', value: 0 },
-			{ name: 'Thief', value: 0 },
-			{ name: 'Warrior', value: 0 },
-		],
-		race: [
-			{ name: 'Asura', value: 0 },
-			{ name: 'Charr', value: 0 },
-			{ name: 'Human', value: 0 },
-			{ name: 'Norn', value: 0 },
-			{ name: 'Sylvari', value: 0 },
-		],
-		played: [],
-		deaths: [],
+		races: [{
+			label: 'Races',
+			data: [0, 0, 0, 0, 0],
+			backgroundColor: ['#DFFF00', '#FFBF00', '#FF7F50', '#DE3163', '#9FE2BF']
+		}],
+		professions: [{
+			label: 'Professions',
+			data: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+			backgroundColor: ['#DFFF00', '#FFBF00', '#FF7F50', '#DE3163', '#9FE2BF', '#40E0D0', '#6495ED', '#CCCCFF', '#B3EB00']
+		}],
+		genders: [{
+			label: 'Genders',
+			data: [0, 0],
+			backgroundColor: ['#DFFF00', '#FFBF00']
+		}],
+		levels: {
+			labels: [],
+			datasets: [{
+				label: 'levels',
+				data: [],
+				backgroundColor: '#6495ED'
+			}]
+		},
+		played: {
+			labels: [],
+			datasets: [{
+				label: 'played',
+				data: [],
+				backgroundColor: '#FFBF00'
+			}]
+		},
+		deaths: {
+			labels: [],
+			datasets: [{
+				label: 'deaths',
+				data: [],
+				backgroundColor: '#FF7F50'
+			}]
+		}
 	}
 
 	data.forEach((character) => {
-		character.gender === 'Male' ? values.gender[0].value++ : values.gender[1].value++;
-		character.level === 80 ? values.level[0].value++ : values.level[1].value++;
+		const raceIndex = chartsStructure.Races.data.labels.indexOf(character.race);
+		const professionIndex = chartsStructure.Professions.data.labels.indexOf(character.profession);
 
-		const professionIndex = values.profession.findIndex((p) => p.name === character.profession);
+		values.races[0].data[raceIndex] += 1;
+		values.professions[0].data[professionIndex] += 1;
+		values.genders[0].data[character.gender === 'Female' ? 0 : 1] += 1;
 
-		if (professionIndex !== -1)
-			values.profession[professionIndex].value++;
+		values.levels.labels.push(character.name);
+		values.levels.datasets[0].data.push(character.level);
 
-		const raceIndex = values.race.findIndex((r) => r.name === character.race);
+		values.played.labels.push(character.name);
+		values.played.datasets[0].data.push(character.age);
 
-		if (raceIndex !== -1)
-			values.race[raceIndex].value++;
-
-		values.played.push({ name: character.name, value: character.age });
-		values.deaths.push({ name: character.name, value: character.deaths });
+		values.deaths.labels.push(character.name);
+		values.deaths.datasets[0].data.push(character.deaths);
 	});
 
 	return values;

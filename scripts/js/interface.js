@@ -1,4 +1,3 @@
-const uiCharts = document.getElementById('charts');
 const uiToken = document.getElementById('token');
 const uiLog = document.getElementById('log');
 const uiRaces = document.getElementById('races');
@@ -8,9 +7,15 @@ const uiLevels = document.getElementById('levels');
 const uiPlayed = document.getElementById('played');
 const uiDeaths = document.getElementById('deaths');
 
+const chartRaces = new Chart(uiRaces, chartsStructure.Races);
+const chartProfessions = new Chart(uiProfessions, chartsStructure.Professions);
+const chartGenders = new Chart(uiGenders, chartsStructure.Genders);
+const chartLevels = new Chart(uiLevels, chartsStructure.Levels);
+const chartPlayed = new Chart(uiPlayed, chartsStructure.Played);
+const chartDeaths = new Chart(uiDeaths, chartsStructure.Deaths);
+
 uiToken.addEventListener('keydown', async (e) => {
 	if (e.key === 'Enter') {
-		uiCharts.style.display = 'none';
 		let token = e.target.value;
 		uiLog.textContent = 'verifying token';
 
@@ -36,17 +41,24 @@ uiToken.addEventListener('keydown', async (e) => {
 				throw new Error('Failed to fetch data');
 
 			uiLog.textContent = 'generating charts';
-			let parsed = parseCharacterData(data);
 
-			generatePieChart(uiRaces, parsed.race);
-			generatePieChart(uiProfessions, parsed.profession);
-			generatePieChart(uiGenders, parsed.gender);
-			generatePieChart(uiLevels, parsed.level);
-			generateBarChart(uiPlayed, parsed.played);
-			generateBarChart(uiDeaths, parsed.deaths);
+			const parsed = parseCharacterData(data);
+
+			chartsStructure.Races.data.datasets = parsed.races;
+			chartsStructure.Professions.data.datasets = parsed.professions;
+			chartsStructure.Genders.data.datasets = parsed.genders;
+			chartsStructure.Levels.data = parsed.levels;
+			chartsStructure.Played.data = parsed.played;
+			chartsStructure.Deaths.data = parsed.deaths;
+
+			chartRaces.update();
+			chartProfessions.update();
+			chartGenders.update();
+			chartLevels.update();
+			chartPlayed.update();
+			chartDeaths.update();
 
 			uiLog.textContent = 'done';
-			uiCharts.style.display = 'inline';
 		} catch (error) {
 			console.error(error);
 			uiLog.textContent = 'An error occurred. Please check the console for details.';
