@@ -5,5 +5,4 @@ References:
 * [Guild Wars 2 Characters](https://wiki.guildwars2.com/wiki/API:2/characters)
 
 Libraries:
-* [charts.js](https://www.chartjs.org)
 * [html2canvas](https://html2canvas.hertzen.com)
