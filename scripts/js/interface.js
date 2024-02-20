@@ -1,20 +1,13 @@
-const uiToken = document.getElementById('token');
-const uiLog = document.getElementById('log');
-const uiRaces = document.getElementById('races');
-const uiProfessions = document.getElementById('professions');
-const uiGenders = document.getElementById('genders');
-const uiLevels = document.getElementById('levels');
-const uiAge = document.getElementById('age');
-const uiDeaths = document.getElementById('deaths');
-const uiScreenshot = document.getElementById('screenshot');
-const uiGraphs = document.getElementById('graphs');
-
-const chartRaces = new Chart(uiRaces, chartsStructure.Races);
-const chartProfessions = new Chart(uiProfessions, chartsStructure.Professions);
-const chartGenders = new Chart(uiGenders, chartsStructure.Genders);
-const chartLevels = new Chart(uiLevels, chartsStructure.Levels);
-const chartAge = new Chart(uiAge, chartsStructure.Age);
-const chartDeaths = new Chart(uiDeaths, chartsStructure.Deaths);
+const uiToken = document.querySelector('#token');
+const uiLog = document.querySelector('#log');
+const uiRaces = document.querySelector('#races');
+const uiProfessions = document.querySelector('#professions');
+const uiGenders = document.querySelector('#genders');
+const uiLevels = document.querySelector('#levels ul');
+const uiAge = document.querySelector('#age ul');
+const uiDeaths = document.querySelector('#deaths ul');
+const uiScreenshot = document.querySelector('#screenshot');
+const uiGraphs = document.querySelector('#graphs');
 
 uiToken.addEventListener('keydown', async (e) => {
 	if (e.key === 'Enter') {
@@ -22,6 +15,8 @@ uiToken.addEventListener('keydown', async (e) => {
 		uiLog.textContent = 'verifying token';
 
 		try {
+			uiGraphs.classList.remove('show');
+
 			if (!verifyToken(token))
 				throw new Error('Token verification failed');
 
@@ -46,21 +41,15 @@ uiToken.addEventListener('keydown', async (e) => {
 
 			const parsed = parseCharacterData(data);
 
-			chartsStructure.Races.data.datasets = parsed.races;
-			chartsStructure.Professions.data.datasets = parsed.professions;
-			chartsStructure.Genders.data.datasets = parsed.genders;
-			chartsStructure.Levels.data = parsed.levels;
-			chartsStructure.Age.data = parsed.age;
-			chartsStructure.Deaths.data = parsed.deaths;
-
-			chartRaces.update();
-			chartProfessions.update();
-			chartGenders.update();
-			chartLevels.update();
-			chartAge.update();
-			chartDeaths.update();
+			generateChart(uiRaces, parsed.races);
+			generateChart(uiProfessions, parsed.professions);
+			generateChart(uiGenders, parsed.genders);
+			generateChart(uiLevels, parsed.levels);
+			generateChart(uiAge, parsed.age);
+			generateChart(uiDeaths, parsed.deaths);
 
 			uiLog.textContent = 'done';
+			uiGraphs.classList.add('show');
 		} catch (error) {
 			console.error(error);
 			uiLog.textContent = 'An error occurred. Please check the console for details.';
@@ -75,4 +64,4 @@ uiScreenshot.addEventListener('click', () => {
 		link.download = 'gw2-account-charts.png';
 		link.click();
 	});
-})
+});
