@@ -38,6 +38,7 @@ input {
 	border-width: 1px;
 	border-style: solid;
 	border-color: #ccc;
+	background-color: #fff;
 	width: 100%;
 	padding: 6px 4px;
 	outline: none;
@@ -114,6 +115,7 @@ section.bars ul li {
 	padding: 4px;
 	margin: 4px 0;
 	background-color: #eee;
+	mix-blend-mode: difference;
 }
 
 section.bars ul li div {
@@ -130,8 +132,9 @@ section.bars ul li span {
 	display: inline-block;
 	position: relative;
 	z-index: 2;
-	color: #000;
+	color: #fff;
 	font-size: 1.4rem;
+	mix-blend-mode: difference;
 }
 
 section.bars ul li span.value {
@@ -140,9 +143,66 @@ section.bars ul li span.value {
 
 nav {
 	position: fixed;
-	top: 24px;
-	right: 24px;
-	width: 32px;
-	height: 32px;
+	top: 16px;
+	right: 16px;
+	font-size: 0;
+}
+
+nav a {
 	cursor: pointer;
+}
+
+nav a svg {
+	fill: #666;
+	width: 48px;
+	height: 48px;
+}
+
+nav a svg:hover {
+	fill: #000;
+}
+
+nav #light {
+	display: none;
+}
+
+body.dark {
+	background-color: #222;
+	color: #ccc;
+}
+
+body.dark nav #dark {
+	display: none;
+}
+
+body.dark nav #light {
+	display: inline-block;
+}
+
+body.dark nav a svg {
+	fill: #aaa;
+}
+
+body.dark nav a svg:hover {
+	fill: #fff;
+}
+
+body.dark input {
+	border-color: #888;
+	background-color: #333;
+	color: #fff;
+}
+
+body.dark input:focus {
+	border-color: #fff;
+}
+
+body.dark #graphs {
+	background-color: #222;
+}
+
+body.dark section.bars ul li {
+	background-color: #111;
+	mix-blend-mode: screen;
+	color: #000;
 }

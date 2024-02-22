@@ -8,6 +8,13 @@ const uiAge = document.querySelector('#age ul');
 const uiDeaths = document.querySelector('#deaths ul');
 const uiScreenshot = document.querySelector('#screenshot');
 const uiGraphs = document.querySelector('#graphs');
+const uiThemeLight = document.querySelector('#light');
+const uiThemeDark = document.querySelector('#dark');
+const uiNavigation = document.querySelectorAll('nav a');
+
+let drawnRaces = false;
+let drawnProfessions = false;
+let drawnGenders = false;
 
 uiToken.addEventListener('keydown', async (e) => {
 	if (e.key === 'Enter') {
@@ -41,9 +48,9 @@ uiToken.addEventListener('keydown', async (e) => {
 
 			const parsed = parseCharacterData(data);
 
-			generateChart(uiRaces, parsed.races);
-			generateChart(uiProfessions, parsed.professions);
-			generateChart(uiGenders, parsed.genders);
+			drawnRaces = generateChart(uiRaces, parsed.races);
+			drawnProfessions = generateChart(uiProfessions, parsed.professions);
+			drawnGenders = generateChart(uiGenders, parsed.genders);
 			generateChart(uiLevels, parsed.levels);
 			generateChart(uiAge, parsed.age);
 			generateChart(uiDeaths, parsed.deaths);
@@ -57,11 +64,50 @@ uiToken.addEventListener('keydown', async (e) => {
 	}
 });
 
-uiScreenshot.addEventListener('click', () => {
-	html2canvas(uiGraphs).then(canvas => {
-		var link = document.createElement('a');
-		link.href = canvas.toDataURL('image/png');
-		link.download = 'gw2-account-charts.png';
-		link.click();
+uiNavigation.forEach(a => {
+	a.addEventListener('click', e => {
+		e.preventDefault();
+
+		switch (a.id) {
+			case 'light':
+				document.body.className = '';
+
+				if (drawnRaces)
+					drawPieCenter(uiRaces, document.body.className);
+
+				if (drawnProfessions)
+					drawPieCenter(uiProfessions, document.body.className);
+
+				if (drawnGenders)
+					drawPieCenter(uiGenders, document.body.className);
+
+				break;
+
+			case 'dark':
+				document.body.className = 'dark';
+
+				if (drawnRaces)
+					drawPieCenter(uiRaces, document.body.className);
+
+				if (drawnProfessions)
+					drawPieCenter(uiProfessions, document.body.className);
+
+				if (drawnGenders)
+					drawPieCenter(uiGenders, document.body.className);
+
+				break;
+
+			case 'screenshot':
+				html2canvas(uiGraphs).then(canvas => {
+					var link = document.createElement('a');
+					link.href = canvas.toDataURL('image/png');
+					link.download = 'gw2-account-charts.png';
+					link.click();
+				});
+
+				break;
+		}
 	});
 });
+
+document.body.className = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : '';

@@ -48,10 +48,19 @@ function drawPieChart(canvas, data) {
 
 		startAngle = endAngle;
 	}
+}
+
+function drawPieCenter(list, color) {
+	const canvas = list.querySelector('canvas');
+
+	var ctx = canvas.getContext('2d');
+	var centerX = canvas.width / 2;
+	var centerY = canvas.height / 2;
+	var radius = Math.min(canvas.width, canvas.height) / 2;
 
 	ctx.beginPath();
 	ctx.arc(centerX, centerY, radius / 2, 0, Math.PI * 2);
-	ctx.fillStyle = '#ffffff';
+	ctx.fillStyle = color == 'dark' ? '#222' : '#fff';
 	ctx.fill();
 }
 
@@ -73,8 +82,9 @@ function generateChart(list, data) {
 			}
 
 			drawPieChart(canvas, data);
+			drawPieCenter(list, document.body.className);
 
-			break;
+			return true;
 
 		case 'bars':
 			list.innerHTML = '';
