@@ -1,3 +1,5 @@
+[gw2-account-charts](https://al-d3baran.github.io/gw2-account-charts)
+
 A JavaScript application that fetches characters information from Guild Wars 2 API and generates charts.
 
 References:

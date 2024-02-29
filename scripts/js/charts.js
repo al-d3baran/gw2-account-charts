@@ -26,7 +26,9 @@ function sortDataByValues(data) {
 	}
 }
 
-function drawPieChart(canvas, data) {
+function drawPieChart(list, data) {
+	const canvas = list.querySelector('canvas');
+
 	canvas.width = 400;
 	canvas.height = 400;
 
@@ -50,7 +52,7 @@ function drawPieChart(canvas, data) {
 	}
 }
 
-function drawPieCenter(list, color) {
+function drawPieCenter(list) {
 	const canvas = list.querySelector('canvas');
 
 	var ctx = canvas.getContext('2d');
@@ -60,7 +62,7 @@ function drawPieCenter(list, color) {
 
 	ctx.beginPath();
 	ctx.arc(centerX, centerY, radius / 2, 0, Math.PI * 2);
-	ctx.fillStyle = color == 'dark' ? '#222' : '#fff';
+	ctx.fillStyle = document.body.className == 'dark' ? '#222' : '#fff';
 	ctx.fill();
 }
 
@@ -68,7 +70,6 @@ function generateChart(list, data) {
 	switch (data.type) {
 		case 'pie':
 			const ul = list.querySelector('ul');
-			const canvas = list.querySelector('canvas');
 
 			ul.innerHTML = '';
 
@@ -81,8 +82,8 @@ function generateChart(list, data) {
 				ul.appendChild(li);
 			}
 
-			drawPieChart(canvas, data);
-			drawPieCenter(list, document.body.className);
+			drawPieChart(list, data);
+			drawPieCenter(list);
 
 			return true;
 

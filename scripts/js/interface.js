@@ -12,10 +12,6 @@ const uiThemeLight = document.querySelector('#light');
 const uiThemeDark = document.querySelector('#dark');
 const uiNavigation = document.querySelectorAll('nav a');
 
-let drawnRaces = false;
-let drawnProfessions = false;
-let drawnGenders = false;
-
 uiToken.addEventListener('keydown', async (e) => {
 	if (e.key === 'Enter') {
 		let token = e.target.value;
@@ -48,9 +44,9 @@ uiToken.addEventListener('keydown', async (e) => {
 
 			const parsed = parseCharacterData(data);
 
-			drawnRaces = generateChart(uiRaces, parsed.races);
-			drawnProfessions = generateChart(uiProfessions, parsed.professions);
-			drawnGenders = generateChart(uiGenders, parsed.genders);
+			generateChart(uiRaces, parsed.races);
+			generateChart(uiProfessions, parsed.professions);
+			generateChart(uiGenders, parsed.genders);
 			generateChart(uiLevels, parsed.levels);
 			generateChart(uiAge, parsed.age);
 			generateChart(uiDeaths, parsed.deaths);
@@ -72,29 +68,17 @@ uiNavigation.forEach(a => {
 			case 'light':
 				document.body.className = '';
 
-				if (drawnRaces)
-					drawPieCenter(uiRaces, document.body.className);
-
-				if (drawnProfessions)
-					drawPieCenter(uiProfessions, document.body.className);
-
-				if (drawnGenders)
-					drawPieCenter(uiGenders, document.body.className);
-
+				drawPieCenter(uiRaces);
+				drawPieCenter(uiProfessions);
+				drawPieCenter(uiGenders);
 				break;
 
 			case 'dark':
 				document.body.className = 'dark';
 
-				if (drawnRaces)
-					drawPieCenter(uiRaces, document.body.className);
-
-				if (drawnProfessions)
-					drawPieCenter(uiProfessions, document.body.className);
-
-				if (drawnGenders)
-					drawPieCenter(uiGenders, document.body.className);
-
+				drawPieCenter(uiRaces);
+				drawPieCenter(uiProfessions);
+				drawPieCenter(uiGenders);
 				break;
 
 			case 'screenshot':
